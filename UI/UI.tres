@@ -1,0 +1,73 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cy5yqq5x02mse"]
+
+[ext_resource type="FontFile" uid="uid://cecgcqvq44c3y" path="res://Assets/knewave.otf" id="1_rvhob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ko220"]
+bg_color = Color(0.345098, 0.345098, 0.345098, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibrfq"]
+bg_color = Color(1, 0.333333, 0.360784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.780392, 0.780392, 0.780392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2fwm"]
+bg_color = Color(1, 0.333333, 0.360784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.737255, 0.737255, 0.737255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlkpr"]
+bg_color = Color(1, 0.333333, 0.360784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wd0c6"]
+bg_color = Color(1, 0.615686, 0.603922, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+default_font = ExtResource("1_rvhob")
+default_font_size = 22
+Button/styles/disabled = SubResource("StyleBoxFlat_ko220")
+Button/styles/focus = SubResource("StyleBoxFlat_ibrfq")
+Button/styles/hover = SubResource("StyleBoxFlat_n2fwm")
+Button/styles/normal = SubResource("StyleBoxFlat_wlkpr")
+Button/styles/pressed = SubResource("StyleBoxFlat_wd0c6")
+Label/fonts/font = ExtResource("1_rvhob")

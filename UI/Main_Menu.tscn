@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://ei3ny6s8bla5"]
+[gd_scene load_steps=8 format=3 uid="uid://ei3ny6s8bla5"]
 
 [ext_resource type="Script" path="res://UI/Main_Menu.gd" id="1"]
+[ext_resource type="Theme" uid="uid://cy5yqq5x02mse" path="res://UI/UI.tres" id="1_3r8ry"]
+[ext_resource type="Script" path="res://UI/Boundary.gd" id="3_e1al2"]
+[ext_resource type="PackedScene" uid="uid://dr50duubwf50c" path="res://Ball/ball.tscn" id="4_ypk4g"]
+[ext_resource type="Shader" path="res://Effects/Main_Menu.gdshader" id="5_1acit"]
+[ext_resource type="AudioStream" uid="uid://bauyy3pprvuku" path="res://Assets/wall.wav" id="5_mxyu7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5yvg"]
+shader = ExtResource("5_1acit")
+shader_parameter/fireMovement = Vector2(-0.01, -0.5)
+shader_parameter/distortionMovement = Vector2(-0.01, -0.3)
+shader_parameter/normalStrength = 40.0
+shader_parameter/distortionStrength = 0.1
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -9,9 +21,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_3r8ry")
 script = ExtResource("1")
 
+[node name="Boundary" type="StaticBody2D" parent="."]
+script = ExtResource("3_e1al2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
+polygon = PackedVector2Array(14, -21, 6, -55, 1250, -61, 1250, 796, 1249, 848, -132, 857, -104, -76, 38, 0, 1152, -1, 1150, 784, 1146, 804, 2, 799, -1, -10, 8, -58, -106, -78, 0, 0, 39, -1, -3, -5)
+
+[node name="Ball" parent="Boundary" instance=ExtResource("4_ypk4g")]
+position = Vector2(200, 200)
+
+[node name="Ball2" parent="Boundary" instance=ExtResource("4_ypk4g")]
+position = Vector2(760, 560)
+
 [node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k5yvg")
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,6 +81,9 @@ offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
+
+[node name="Ball_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mxyu7")
 
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

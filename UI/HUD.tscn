@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://do7pdpjxteg8e"]
+[gd_scene load_steps=3 format=3 uid="uid://do7pdpjxteg8e"]
 
 [ext_resource type="Script" path="res://UI/HUD.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://col588o7a25n4" path="res://Assets/Raleway-ExtraLightItalic.otf" id="2_qrjvt"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -28,6 +29,8 @@ layout_mode = 0
 offset_left = 15.0
 offset_right = 215.0
 offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("2_qrjvt")
+theme_override_font_sizes/font_size = 30
 text = "Score: "
 vertical_alignment = 1
 
@@ -38,11 +41,22 @@ anchor_right = 1.0
 offset_left = -214.0
 offset_right = -14.0
 offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("2_qrjvt")
+theme_override_font_sizes/font_size = 30
 text = "Time: "
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 14.0
+offset_right = 727.0
+offset_bottom = 34.0
+color = Color(0.203922, 0.227451, 0.25098, 1)
+
 [node name="Fever" type="ProgressBar" parent="."]
+use_parent_material = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

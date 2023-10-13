@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd5m3yq1k5fx8"]
+[gd_scene load_steps=20 format=3 uid="uid://bd5m3yq1k5fx8"]
 
 [ext_resource type="Script" path="res://Brick/Brick_Container.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dmwf8wjdir6y5" path="res://Paddle/Paddle.tscn" id="2"]
+[ext_resource type="Script" path="res://Effects/Background.gd" id="2_4qjrw"]
+[ext_resource type="Script" path="res://Ball/Comet_Container.gd" id="2_c6sep"]
 [ext_resource type="Script" path="res://Ball/Ball_Container.gd" id="3"]
 [ext_resource type="Script" path="res://Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://ci5q3vmuimsfr" path="res://UI/Pause_Menu.tscn" id="5"]
@@ -9,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://do7pdpjxteg8e" path="res://UI/HUD.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://r1nm10jeqyta" path="res://UI/Instructions.tscn" id="8"]
 [ext_resource type="Script" path="res://Effects/Fever.gd" id="9"]
+[ext_resource type="Script" path="res://UI/Camera.gd" id="10_8h2yy"]
+[ext_resource type="AudioStream" uid="uid://cqwgq42phms7h" path="res://Assets/brickbreaker2.mp3" id="11_sec5p"]
+[ext_resource type="AudioStream" uid="uid://bauyy3pprvuku" path="res://Assets/wall.wav" id="12_sjyyh"]
+[ext_resource type="AudioStream" uid="uid://dgqxj35pdtarq" path="res://Assets/paddle.wav" id="13_6dv8l"]
+[ext_resource type="AudioStream" uid="uid://55yqalmh80q3" path="res://Assets/bricks.wav" id="14_g5fb1"]
+[ext_resource type="AudioStream" uid="uid://d1v3bcgw07fvw" path="res://Assets/die.wav" id="15_07ti4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(200, 1000)
@@ -19,12 +27,26 @@ size = Vector2(1224, 200)
 [node name="Game" type="Node2D"]
 script = ExtResource("4")
 
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1144.0
+offset_bottom = 802.0
+color = Color(0.223529, 0.223529, 0.223529, 1)
+script = ExtResource("2_4qjrw")
+
+[node name="Comet_Container" type="Node2D" parent="."]
+script = ExtResource("2_c6sep")
+
 [node name="Wall_Container" type="Node2D" parent="."]
 
 [node name="Wall_Left" type="StaticBody2D" parent="Wall_Container"]
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Left"]
+offset_left = -188.0
+offset_top = -89.0
+offset_right = 12.0
+offset_bottom = 911.0
+color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Left"]
 position = Vector2(-90, 400)
@@ -35,6 +57,11 @@ position = Vector2(1152, 2.08165e-12)
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Right"]
+offset_left = -8.0
+offset_top = -104.0
+offset_right = 192.0
+offset_bottom = 896.0
+color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Right"]
 position = Vector2(90, 400)
@@ -44,9 +71,14 @@ shape = SubResource("1")
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="Wall_Container/Wall_Top"]
+offset_left = -52.0
+offset_top = -195.0
+offset_right = 1172.0
+offset_bottom = 5.0
+color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_Container/Wall_Top"]
-position = Vector2(512, -90)
+position = Vector2(553, -92)
 shape = SubResource("2")
 
 [node name="Brick_Container" type="Node2D" parent="."]
@@ -63,6 +95,7 @@ script = ExtResource("3")
 [node name="Powerup_Container" type="Node2D" parent="."]
 
 [node name="Fever" type="Node2D" parent="."]
+position = Vector2(0, -2)
 script = ExtResource("9")
 
 [node name="Timer" type="Timer" parent="Fever"]
@@ -75,9 +108,32 @@ visible = false
 [node name="Pause_Menu" parent="UI" instance=ExtResource("5")]
 process_mode = 3
 visible = false
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Instructions" parent="UI" instance=ExtResource("8")]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 3.0
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(575, 403)
+script = ExtResource("10_8h2yy")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_sec5p")
+volume_db = -10.307
+autoplay = true
+
+[node name="Wall_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_sjyyh")
+
+[node name="Paddle_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_6dv8l")
+
+[node name="Brick_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_g5fb1")
+
+[node name="Die_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_07ti4")
 
 [connection signal="timeout" from="Fever/Timer" to="Fever" method="_on_Timer_timeout"]
